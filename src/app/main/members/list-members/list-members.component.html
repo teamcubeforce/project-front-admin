@@ -1,0 +1,85 @@
+<section class="section__members w-full min-h-screen py-10 overflow-y-auto bg-slate-50">
+    <h2 class="text-center text-4xl font-bold text-blue-900">Miembros</h2>
+    <div class="filters my-8 px-3 sm:px-5 flex flex-wrap gap-3 lg:flex-nowrap relative">
+        <div class="w-full lg:w-96 relative">
+            <label for="Search" class="sr-only"> Buscar </label>
+          
+            <input
+              type="text"
+              id="Search"
+              placeholder="Buscar..."
+              class="w-full rounded-md border-gray-200 px-3 py-2.5 pe-10 shadow-sm sm:text-sm outline-none"
+              (input)="searchMember($event)"
+            />
+          
+            <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-4 w-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
+            </span>
+        </div>
+        <div class="filters__state w-44 relative">
+          <button class="w-full py-2 bg-slate-300 rounded-md text-center" (click)="filterState()" >Filtrar por</button>
+          <ul class="w-full bg-white shadow-lg rounded-md absolute top-12 z-10 overflow-hidden" [class.hidden]="!filter">
+            <li>
+              <button class="w-full p-2 flex gap-1 items-center hover:bg-slate-300 cursor-pointer" (click)="checkState('activo')">
+                <div class="state w-3 h-3 rounded-full bg-green-500"></div>
+              Miembro Actual
+              </button>
+            </li>
+            <li>
+              <button class="w-full p-2 flex gap-1 items-center hover:bg-slate-300 cursor-pointer" (click)="checkState('retirado')">
+                <div class="state w-3 h-3 rounded-full bg-slate-500"></div>
+              Miembro Antiguo
+              </button>
+            </li>
+            <li>
+              <button class="w-full p-2 flex gap-1 items-center hover:bg-slate-300 cursor-pointer" (click)="checkState('bloqueado')">
+                <div class="state w-3 h-3 rounded-full bg-red-500"></div>
+              Miembro Eliminado
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="button__new h-10 lg:absolute right-5">
+          <a routerLink="nuevo" class="w-full h-full flex gap-2 items-center px-2 bg-green-600 text-white rounded">
+            <strong>+</strong> Agregar nuevo miembro
+          </a>
+        </div>
+    </div>
+    <div class="conteiner px-3 sm:px-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+        <div class="member bg-blue-700 text-center p-5 rounded-lg relative overflow-hidden" 
+        *ngFor="let member of members">
+            <div class="member__photo w-28 h-28 mx-auto rounded-xl overflow-hidden">
+                <img src="{{member.photo_member}}" alt="" class="w-full h-full">
+            </div>
+            <div class="member__name bg-gray-400 mt-2 text-white"
+            [ngClass]="{
+                'bg-green-500': member.state_member=='activo',
+                'bg-slate-500': member.state_member=='retirado',
+                'bg-red-500': member.state_member=='bloqueado',
+            }">
+                {{member.name_member}}    
+            </div>
+            <div class="member__cape hidden absolute w-full h-full justify-center items-center bg-black bg-opacity-50 top-0 left-0">
+              <a routerLink="{{member.id_member}}" class="bg-white p-3 rounded text-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="fill-black"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg>
+              </a>
+            </div>
+        </div>
+    </div>
+    
+
+</section>
+

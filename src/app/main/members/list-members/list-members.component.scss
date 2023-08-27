@@ -1,0 +1,15 @@
+.member{
+    background: rgb(11,6,82);
+    background: linear-gradient(18deg, rgba(11,6,82,1) 0%, rgba(9,9,121,1) 51%);
+    &__name{
+        width: 100%;
+        height: 25px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    &:hover .member__cape{
+        display: flex;
+    }
+}
